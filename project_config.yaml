@@ -1,0 +1,35 @@
+# ============================================================
+# Profundus-Comet — Project Configuration
+# This is the persistent project instruction block.
+# ============================================================
+
+project_name: "Profundus-Comet"
+project_id: "54ce9631-a2c3-4787-9b24-444da2e65671"
+version: "v2026"
+
+# --- LLM Backend ---
+ollama_url: "http://localhost:11434"
+model: "llama3.1:8b"          # swap to llama3.1:70b or qwen2.5:72b in prod
+embedding_model: "nomic-embed-text"
+
+# --- Memory / RAG ---
+memory_backend: "chroma"      # options: chroma, faiss
+memory_path: "./projects/profundus-comet/memory"
+
+# --- Web Search ---
+search_backend: "searxng"     # options: searxng, tavily
+searxng_url: "http://localhost:8080"
+
+# --- Agent Behavior ---
+max_iterations: 20
+verbose: true
+epistemic_tags: true          # emit [HIGH CONFIDENCE] / [MEDIUM] / etc.
+
+# --- Prompt ---
+system_prompt: "./agent/prompts/system_prompt.md"
+
+# --- Project Sources ---
+sources_dir: "./projects/profundus-comet/sources"
+
+# --- Session Memory Log ---
+memory_log: "./projects/profundus-comet/memory/sessions.jsonl"
