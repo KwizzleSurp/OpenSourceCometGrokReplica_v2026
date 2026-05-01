@@ -1,0 +1,41 @@
+# docker-compose.yml
+# Starts SearxNG (local search) + optionally Open WebUI
+# Usage: docker compose up -d
+
+version: '3.8'
+
+services:
+  searxng:
+    image: searxng/searxng:latest
+    container_name: profundus-searxng
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./docker/searxng:/etc/searxng:rw
+    environment:
+      - SEARXNG_BASE_URL=http://localhost:8080
+    restart: unless-stopped
+    networks:
+      - profundus
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: profundus-webui
+    ports:
+      - "3000:8080"
+    volumes:
+      - open-webui-data:/app/backend/data
+    environment:
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    networks:
+      - profundus
+
+volumes:
+  open-webui-data:
+
+networks:
+  profundus:
+    driver: bridge
