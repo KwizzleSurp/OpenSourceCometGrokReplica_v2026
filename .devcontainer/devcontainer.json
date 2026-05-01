@@ -1,17 +1,8 @@
 {
   "name": "Profundus-Comet",
   "image": "mcr.microsoft.com/devcontainers/python:3.11",
-  "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
-  },
   "postCreateCommand": "pip install -r requirements.txt && playwright install --with-deps chromium",
   "forwardPorts": [8000, 8080, 11434, 3000],
-  "portsAttributes": {
-    "8000": {"label": "FastAPI"},
-    "8080": {"label": "SearxNG"},
-    "11434": {"label": "Ollama"},
-    "3000": {"label": "Open WebUI", "onAutoForward": "openBrowser"}
-  },
   "customizations": {
     "vscode": {
       "extensions": [
